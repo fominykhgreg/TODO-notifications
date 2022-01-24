@@ -1,28 +1,29 @@
 import React from 'react'
 
 
-const AuthorItem = ({item}) => {
+const BookItem = ({item}) => {
     return (
         <tr>
             <td>{item.id}</td>
             <td>{item.name}</td>
-            <td>{item.birthday_year}</td>
+            <td>{item.author.name}</td>
         </tr>
     )
 }
 
 
-const AuthorList = ({items}) => {
+const BookList = ({items}) => {
     return (
         <table>
             <tr>
                 <th>ID</th>
                 <th>NAME</th>
-                <th>BIRTHDAY_YEAR</th>
+                <th>AUHTOR</th>
             </tr>
-            {items.map((item) => <AuthorItem item={item} />)}
+            {items.map((item) => <BookItem item={item} />)}
         </table>
     )
 }
 
-export default AuthorList
+
+export default BookList
