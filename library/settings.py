@@ -37,10 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'graphene_django',
     'rest_framework',
     'authors',
     'authapp',
     'corsheaders',
+    'rest_framework.authtoken',
+    #'django.contrib.staticfiles',
+    'drf_yasg',
+    'userapp',
+    'mainapp',
+
 ]
 
 MIDDLEWARE = [
@@ -52,6 +59,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    
+
 ]
 
 ROOT_URLCONF = 'library.urls'
@@ -128,11 +138,32 @@ CORS_ALLOWED_ORIGINS = [
    "http://localhost:3000",
 ]
 
+GRAPHENE = {
+    "SCHEMA": "library.schema.schema"
+}
+
+
 
 REST_FRAMEWORK = {
+    #'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
+    #'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
+    #'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.QueryParameterVersioning',
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.AcceptHeaderVersioning',
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
+
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ]
+
+
 }
 
